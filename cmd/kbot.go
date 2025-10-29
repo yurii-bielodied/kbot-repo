@@ -52,7 +52,7 @@ Usage:
 				return m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
 
 			case "time":
-				return m.Send(fmt.Sprintf("Time is %v", time.Now().Format("29-10-2025 14:27:00")))
+				return m.Send(fmt.Sprintf("Current time is %v", time.Now().Format("2006-01-02 15:04:05")))
 
 			default:
 				return m.Send("Hello from Kbot!")
