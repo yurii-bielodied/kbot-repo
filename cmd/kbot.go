@@ -24,7 +24,8 @@ var kbotCmd = &cobra.Command{
 The bot accepts some commands.
 
 Usage:
-  hello     - Get a greeting from the bot`,
+  hello     - Get a greeting from the bot
+  time      - Get system time`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if TeleToken == "" {
 			log.Fatal("TELE_TOKEN environment variable is not set")
@@ -49,6 +50,9 @@ Usage:
 			switch payload {
 			case "hello":
 				return m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
+
+			case "time":
+				return m.Send(fmt.Sprintf("Time is %t"))
 
 			default:
 				return m.Send("Hello from Kbot!")
