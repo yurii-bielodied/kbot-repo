@@ -51,7 +51,7 @@ Usage:
 				return m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
 
 			default:
-				return m.Send("")
+				return m.Send("Hello from Kbot!")
 			}
 		})
 
