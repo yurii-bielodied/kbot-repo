@@ -9,4 +9,4 @@ FROM scratch
 WORKDIR /
 COPY --from=builder /app .
 COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT [""]
+ENTRYPOINT ["./kbot", "start"]
