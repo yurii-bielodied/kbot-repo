@@ -7,6 +7,6 @@ RUN make build TARGETARCH=$TARGETARCH
 
 FROM scratch
 WORKDIR /
-COPY --from=builder /app .
+COPY --from=builder /app/kbot .
 COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT ["./kbot", "start"]
