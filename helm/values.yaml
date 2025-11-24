@@ -9,7 +9,7 @@ replicaCount: 1
 image:
   repository: yurabeloded
   # This sets the pull policy for images.
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.1.0"
   arch: amd64
