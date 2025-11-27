@@ -88,6 +88,7 @@ jobs:
             REGISTRY: "ghcr.io/${{ github.repository_owner }}"
           run: |
             make image push \
+              REGISTRY=${{ env.REGISTRY }} \
               TARGETARCH=${{ env.TARGETARCH }} \
               TARGETOS=${{ env.TARGETOS }} \
               VERSION=${{ env.VERSION }}
