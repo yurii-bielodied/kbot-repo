@@ -1,6 +1,6 @@
 # Application name and registry configuration
 APP ?= $(shell basename $(shell git remote get-url origin))
-REGISTRY ?= ghcr.io/yurii-bielodied
+REGISTRY ?= yurii-bielodied
 VERSION ?= v$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 REPO ?= kbot-repo
 
@@ -70,13 +70,13 @@ get:
 dev: format get
 	@echo "Building development version..."
 	@CGO_ENABLED=$(CGO_ENABLED) GOOS=$(TARGETOS) GOARCH=$(TARGETARCH) \
-		go build -v -o kbot-repo -ldflags "-X=github.com/$(REGISTRY)/$(REPO)/cmd.appVersion=$(VERSION)-dev"
+		go build -v -o kbot -ldflags "-X=github.com/$(REGISTRY)/$(REPO)/cmd.appVersion=$(VERSION)-dev"
 
 # Production build
 build: format get
 	@echo "Building production version..."
 	@CGO_ENABLED=$(CGO_ENABLED) GOOS=$(TARGETOS) GOARCH=$(TARGETARCH) \
-		go build -v -o kbot-repo -ldflags "-X=github.com/$(REGISTRY)/$(REPO)/cmd.appVersion=$(VERSION) -w -s"
+		go build -v -o kbot -ldflags "-X=github.com/$(REGISTRY)/$(REPO)/cmd.appVersion=$(VERSION) -w -s"
 
 # Build Docker image
 image:
@@ -94,7 +94,7 @@ push:
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
-	@rm -rf kbot-repo
+	@rm -rf kbot
 	@docker rmi $(REGISTRY)/$(APP):$(VERSION)-$(TARGETOS)-$(TARGETARCH) || true
 
 # Release target
