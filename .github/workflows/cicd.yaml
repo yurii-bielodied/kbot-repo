@@ -75,14 +75,17 @@ jobs:
 
         # - name: Build and push
         #   uses: docker/build-push-action@v6
+        #   env:
+        #     APP: "kbot"
+        #     REGISTRY: ghcr.io
         #   with:
         #     push: true
-        #     tags: user/app:latest
+        #     tags: ${{ github.actor }}/kbot:${{ env.VERSION }}
 
         - name: Build and Push Container to GitHub Container Registry
           env:
             APP: "kbot"
-            REGISTRY: ghcr.io
+            REGISTRY: "ghcr.io/${{ github.repository_owner }}"
           run: |
             make image push \
               TARGETARCH=${{ env.TARGETARCH }} \
