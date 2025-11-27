@@ -6,13 +6,13 @@ on:
   pull_request:
     branches: [ develop ]
 
+permissions:
+  contents: write
+  packages: write
+
 env:
   TARGETOS: linux
   TARGETARCH: amd64
-
-permissions:
-  contents: read
-  packages: write
 
 jobs:
     ci:
@@ -77,15 +77,6 @@ jobs:
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
 
-        # - name: Build and push
-        #   uses: docker/build-push-action@v6
-        #   env:
-        #     APP: "kbot"
-        #     REGISTRY: ghcr.io
-        #   with:
-        #     push: true
-        #     tags: ${{ github.actor }}/kbot:${{ env.VERSION }}
-
         - name: Build and Push Container to GitHub Container Registry
           env:
             APP: "kbot"
@@ -99,7 +90,7 @@ jobs:
         - name: Update Helm chart
           uses: mikefarah/yq@master
           with:
-            cmd: yq -i '.image.tag=strenv(VERSION) | .image.arch=strenv(TARGETARCH)' helm/values.yaml
+            cmd: yq -i '.image.repository=strenv(REGISTRY) | .image.tag=strenv(VERSION) | .image.arch=strenv(TARGETARCH)' helm/values.yaml
         - run: |
             git config user.name github-actions
             git config user.email github-actions@github.com
