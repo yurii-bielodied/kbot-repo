@@ -84,8 +84,8 @@ jobs:
             REGISTRY: "${{ env.REGISTRY }}"
           run: |
             make image push \
-              TARGETARCH=${{ env.TARGETARCH }} \
               TARGETOS=${{ env.TARGETOS }} \
+              TARGETARCH=${{ env.TARGETARCH }} \
               VERSION=${{ env.VERSION }}
 
         - name: Update Helm chart
